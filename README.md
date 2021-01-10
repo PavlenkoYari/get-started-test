@@ -1,4 +1,4 @@
-# Get Starter Frontend Worker
+# Get Starter Worker
 
 ## Getting Started
 
@@ -62,4 +62,7 @@ $ npm run dev
 ```shell script
 $ npm run start
 ```
+
+## Api docs
+https://documenter.getpostman.com/view/12411696/TVzREchM
 
