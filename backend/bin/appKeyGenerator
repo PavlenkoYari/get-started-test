@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+const config = require('jsconfig');
+
+const configPath =
+	process.argv.indexOf('--config') !== -1 ? process.argv[process.argv.indexOf('--config') + 1] : './config.js';
+
+function generateRandomKey() {
+	return Buffer.from(crypto.randomBytes(32).toString('hex')).toString('base64');
+}
+
+function writeNewEnvironmentKey(key) {
+	config.env.appKey = key;
+	delete config.merge;
+	fs.writeFileSync('config.js', `module.exports = ${JSON.stringify(config)}`);
+}
+
+config.load(path.resolve(configPath), async () => {
+	writeNewEnvironmentKey(generateRandomKey());
+});

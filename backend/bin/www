@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+const configLoader = require('./config.loader');
+
+const start = async () => {
+	const config = await configLoader();
+	// http server
+	const HttpServer = require('../src/http-server');
+	// wait server init
+	await HttpServer.init(config.http.host, config.http.port);
+};
+
+start();
